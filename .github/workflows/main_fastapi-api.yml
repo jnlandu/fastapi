@@ -1,6 +1,6 @@
 # Docs for the Azure Web Apps Deploy action: https://github.com/Azure/webapps-deploy
 # More GitHub Actions for Azure: https://github.com/Azure/actions
-# More infos on Python, GitHub Actions, and Azure App Service: https://aka.ms/python-webapps-actions
+# More info on Python, GitHub Actions, and Azure App Service: https://aka.ms/python-webapps-actions
 
 name: Build and deploy Python app to Azure Web App - fastapi-api
 
@@ -8,15 +8,10 @@ on:
   push:
     branches:
       - main
-    paths:
-      - backend/**
   workflow_dispatch:
 
 jobs:
   build:
-    defaults:
-      run:
-        working-directory: backend
     runs-on: ubuntu-latest
 
     steps:
@@ -33,10 +28,7 @@ jobs:
           source venv/bin/activate
       
       - name: Install dependencies
-        run: |
-          python -m pip install --upgrade pip
-          pip install 'fastapi[standard]'
-          pip install -r requirements.txt
+        run: pip install -r requirements.txt
         
       # Optional: Add step to run tests here (PyTest, Django test suites, etc.)
 
@@ -48,14 +40,10 @@ jobs:
         with:
           name: python-app
           path: |
-            backend/
             release.zip
             !venv/
 
   deploy:
-    defaults:
-      run:
-        working-directory: backend
     runs-on: ubuntu-latest
     needs: build
     environment:
@@ -71,7 +59,7 @@ jobs:
           name: python-app
 
       - name: Unzip artifact for deployment
-        run: unzip -o release.zip
+        run: unzip release.zip
 
       
       - name: Login to Azure
@@ -86,5 +74,5 @@ jobs:
         id: deploy-to-webapp
         with:
           app-name: 'fastapi-api'
-          package: backend
+          slot-name: 'Production'
           
