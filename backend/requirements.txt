@@ -9,4 +9,5 @@ evidently # in case we need to do model monitoring
 sqlalchemy
 python-jose
 passlib
+gunicorn
 
