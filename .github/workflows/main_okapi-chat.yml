@@ -24,7 +24,7 @@ jobs:
         uses: SpicyPizza/create-envfile@v2.0
         with:
           envkey_DEBUG: false
-          envkey_NEXT_PUBLIC_FASTAPI_API_URL: 'https://fastapi-api.azurewebsites.net'
+          envkey_NEXT_PUBLIC_API_URL: ${{ secrets.NEXT_PUBLIC_FASTAPI_API_URL }}
           fail_on_empty: true
           directory: frontend/
           file_name: .env
