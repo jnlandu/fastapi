@@ -1,5 +1,6 @@
-python-dotenv
-PyPDF2
+fastapi
+uvicorn
+gunicorn
 python-dotenv
 bcrypt
 pytest
@@ -9,5 +10,5 @@ evidently # in case we need to do model monitoring
 sqlalchemy
 python-jose
 passlib
-gunicorn
+
 

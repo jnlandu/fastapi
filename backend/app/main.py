@@ -17,7 +17,9 @@ async def health_check():
 app.include_router(auth.router)
 app.include_router(chat.router)
 
-
-print("Server is running correctly")
+if __name__ == "__main__":
+    import uvicorn
+    uvicorn.run("app.main:app", reload=True)
+    print("Server is running correctly")
 
 
